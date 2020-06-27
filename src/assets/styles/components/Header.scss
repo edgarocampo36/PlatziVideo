@@ -1,12 +1,19 @@
 .header {
   align-items: center;
-  background: #8f57fd;
   color: white;
   display: flex;
   height: 100px;
   justify-content: space-between;
   top: 0px;
   width: 100%;
+}
+
+.morado {
+  background: #8f57fd;
+}
+
+.green {
+  background: #21c08b;
 }
 
 .header__img {
@@ -18,31 +25,31 @@
   margin-right: 30px;
 }
 
-.header__menuul {
+.header__menu ul {
   display: none;
   list-style: none;
-  margin: 0px0px0px -14px;
+  margin: 0px 0px 0px -14px;
   padding: 0px;
   position: absolute;
   width: 100px;
   text-align: right;
 }
 
-.header__menu:hoverul,
+.header__menu:hover ul,
 ul:hover {
   display: block;
 }
 
-.header__menuli {
-  margin: 10px0px;
+.header__menu li {
+  margin: 10px 0px;
 }
 
-.header__menulia {
+.header__menu li a {
   color: white;
   text-decoration: none;
 }
 
-.header__menulia:hover {
+.header__menu li a:hover {
   text-decoration: underline;
 }
 
@@ -52,7 +59,9 @@ ul:hover {
   cursor: pointer;
 }
 
-.header__menu--profileimg {
+.header__menu--profile img {
   margin-right: 8px;
   width: 40px;
+  border-radius: 100%;
+  object-fit: cover;
 }
