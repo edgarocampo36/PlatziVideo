@@ -17,7 +17,7 @@ const entry = ["./src/frontend/index.js"];
 
 if (isDev) {
   entry.push(
-    "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true"
+    "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true"
   );
 }
 module.exports = {
@@ -58,12 +58,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        enforce: "pre",
-        test: /\.(js|jsx)$/,
-        exclude: "node_modules",
-        loader: "eslint_loader",
-      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

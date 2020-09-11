@@ -1,9 +1,10 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { loginRequest } from "../actions";
+import { loginUser } from "../actions";
 import Header from "../components/Header";
 import googleIcon from "../assets/static/google-icon.png";
 import twitterIcon from "../assets/static/twitter-icon.png";
@@ -11,7 +12,7 @@ import twitterIcon from "../assets/static/twitter-icon.png";
 import "../assets/styles/components/Login.scss";
 
 const Login = (props) => {
-  const { loginRequest } = props;
+  const { loginUser } = props;
 
   const [form, setForm] = useState({
     email: "",
@@ -26,8 +27,7 @@ const Login = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    loginRequest(form);
-    props.history.push("/");
+    loginUser(form, "/");
   };
 
   return (
@@ -44,13 +44,15 @@ const Login = (props) => {
             onChange={handleInput}
           />
           <input
-            name="pass"
+            name="password"
             className="input"
             type="password"
             placeholder="Contraseña"
             onChange={handleInput}
           />
-          <button className="button">Iniciar sesión</button>
+          <button className="button" type="submit">
+            Iniciar sesión
+          </button>
           <div className="login__container--remember-me">
             <label>
               <input type="checkbox" id="cbox1" value="first_checkbox" />
@@ -79,7 +81,11 @@ const Login = (props) => {
 };
 
 const mapDispatchToProps = {
-  loginRequest,
+  loginUser,
+};
+
+Login.propTypes = {
+  loginUser: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

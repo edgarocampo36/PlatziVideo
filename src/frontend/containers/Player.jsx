@@ -7,6 +7,7 @@ import "../assets/styles/components/Player.scss";
 const Player = (props) => {
   const { match, playing } = props;
   const { id } = match.params;
+
   const hasPlaying = Object.keys(playing).length > 0;
 
   const [loading, setLoading] = useState(true);

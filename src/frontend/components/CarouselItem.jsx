@@ -10,11 +10,20 @@ import plusIcon from "../assets/static/plus-icon.png";
 import deleteIcon from "../assets/static/delete-icon.png";
 
 const CarouselItem = (props) => {
-  const { id, cover, title, year, contentRating, duration, isList } = props;
+  const {
+    _id,
+    cover,
+    title,
+    year,
+    contentRating,
+    duration,
+    userMovieId,
+    isList,
+  } = props;
 
   const handleSetFavorite = () => {
     props.setFavorite({
-      id,
+      _id,
       cover,
       title,
       year,
@@ -24,7 +33,7 @@ const CarouselItem = (props) => {
   };
 
   const handleDeleteFavorite = () => {
-    props.deleteFavorite(id);
+    props.deleteFavorite(userMovieId);
   };
 
   return (
@@ -32,7 +41,7 @@ const CarouselItem = (props) => {
       <img className="carousel-item__img" src={cover} alt={title} />
       <div className="carousel-item__details">
         <div>
-          <Link to={`/player/${id}`}>
+          <Link to={`/player/${_id}`}>
             <img
               className="carousel-item__details--img"
               src={playIcon}

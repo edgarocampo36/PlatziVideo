@@ -80,3 +80,5 @@ src/server/public
 nextjs
 
 platzivideo-gatsby
+
+src/frontend/__test__/components/__snapshots__

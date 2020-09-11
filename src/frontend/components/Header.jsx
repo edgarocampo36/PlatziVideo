@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logoutRequest } from "../actions";
 import gravatar from "../utils/gravatar";
-
 import "../assets/styles/components/Header.scss";
-
 import logo from "../assets/static/logo-platzi-video-BW2.png";
 import userIcon from "../assets/static/user-icon.png";
 
@@ -14,7 +12,16 @@ const Header = (props) => {
   const { user, logoutRequest } = props;
   const hasUser = Object.keys(user).length > 0;
 
-  const handleLogout = () => logoutRequest({});
+  const handleLogout = () => {
+    document.cookie = "email=";
+    document.cookie = "name=";
+    document.cookie = "id=";
+    document.cookie = "token=";
+
+    logoutRequest({});
+
+    window.location.href = "/login";
+  };
 
   return (
     <header className="header">

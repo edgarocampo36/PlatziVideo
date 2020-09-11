@@ -1,10 +1,12 @@
-export const setFavorite = (payload) => ({
-  type: "SET_FAVORITE",
+import axios from "axios";
+
+export const setFavoriteRequest = (payload) => ({
+  type: "SET_FAVORITE_REQUEST",
   payload,
 });
 
-export const deleteFavorite = (payload) => ({
-  type: "DELETE_FAVORITE",
+export const deleteFavoriteRequest = (payload) => ({
+  type: "DELETE_FAVORITE_REQUEST",
   payload,
 });
 
@@ -32,3 +34,71 @@ export const getVideoSearch = (payload) => ({
   type: "GET_VIDEO_SEARCH",
   payload,
 });
+
+export const setError = (payload) => ({
+  type: "SET_ERROR",
+  payload,
+});
+
+export const registerUser = (payload, redirectUrl) => {
+  return (dispatch) => {
+    axios
+      .post("/auth/sign-up", payload)
+      .then(({ data }) => dispatch(registerRequest(data)))
+      .then(() => {
+        window.location.href = redirectUrl;
+      })
+      .catch((error) => dispatch(setError(error)));
+  };
+};
+
+export const loginUser = ({ email, password }, redirectUrl) => {
+  return (dispatch) => {
+    axios({
+      url: "/auth/sign-in",
+      method: "post",
+      auth: {
+        username: email,
+        password,
+      },
+    })
+      .then(({ data }) => {
+        console.log(data);
+        document.cookie = `email=${data.user.email}`;
+        document.cookie = `name=${data.user.name}`;
+        document.cookie = `id=${data.user.id}`;
+        dispatch(loginRequest(data.user));
+      })
+      .then(() => {
+        window.location.href = redirectUrl;
+      })
+      .catch((error) => dispatch(setError(error)));
+  };
+};
+
+export const setFavorite = (payload) => {
+  const { _id } = payload;
+  return (dispatch) => {
+    axios({
+      url: "/user-movies",
+      method: "post",
+      data: {
+        movieId: _id,
+      },
+    })
+      .then(() => dispatch(setFavoriteRequest(payload)))
+      .catch((error) => dispatch(setError(error)));
+  };
+};
+
+export const deleteFavorite = (userMovieId) => {
+  return (dispatch) => {
+    axios({
+      url: `/user-movies/${userMovieId}`,
+      method: "delete",
+    })
+      .then(() => dispatch(deleteFavoriteRequest(userMovieId)))
+      .catch((error) => dispatch(setError(error)));
+  };
+};
+export { setFavorite as default };
