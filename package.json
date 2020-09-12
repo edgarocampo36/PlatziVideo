@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack-cli --config webpack.config.js",
     "server": "json-server initialState.json",
+    "start": "node src/server/index.js",
     "start:dev": "nodemon src/server/index",
     "lint": "eslint src/frontend/ --ext .js --ext .jsx --fix",
     "test": "jest",
